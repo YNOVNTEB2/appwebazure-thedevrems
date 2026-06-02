@@ -1,25 +1,28 @@
-name: Deploy to Azure
+name: Deploy appwebazure-thedevrems to Azure
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'   # aligné sur "engines" de package.json (>=24.0.0)
 
+      # L'app n'a aucune dépendance externe ; npm install est sans effet
+      # mais reste utile si des dépendances sont ajoutées plus tard.
       - run: npm install
 
       - name: Deploy to Azure
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
-          app-name: 'webapp-aros'  # remplace ici
+          app-name: 'appwebazure-thedevrems'   # nom de la Web App Azure (= nom du dépôt)
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          #package: .
+          package: .
