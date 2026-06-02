@@ -1,0 +1,14 @@
+{
+  "name": "appwebazure",
+  "version": "1.0.0",
+  "description": "App web très simple (thème dark) pour tester un déploiement Azure",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "private": true,
+  "license": "MIT"
+}
